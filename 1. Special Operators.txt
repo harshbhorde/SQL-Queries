@@ -1,0 +1,150 @@
+
+
+1) List all the employees whose commission is NULL  
+SELECT * FROM EMP WHERE COMM IS NULL;
+
+2) List all the employees who don’t have a reporting manager  
+
+SELECT * FROM EMP WHERE MGR IS NULL;
+
+
+3) List all the salesmen in DEPT 30  
+
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND DEPTNO = 30;
+
+
+4) List all the salesmen in DEPT number 30 and having salary greater than 1500  
+
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND DEPTNO = 30 AND SAL > 1500;
+
+
+5) List all the employees whose name starts with ‘S’ or ‘A’  
+
+SELECT * FROM EMP WHERE ENAME LIKE 'S%' OR ENAME LIKE 'A%';
+
+
+6) List all the employees except those who are working in DEPT 10 & 20  
+
+SELECT * FROM EMP WHERE DEPTNO NOT IN (10, 20);
+
+
+7) List the employees whose name does not start with ‘S’  
+
+SELECT * FROM EMP WHERE ENAME NOT LIKE 'S%';
+
+
+8) List all the employees who are having reporting managers in DEPT 10  
+
+SELECT * FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE DEPTNO = 10);
+
+
+9) List all the employees whose commission is NULL and working as CLERK  
+
+SELECT * FROM EMP WHERE COMM IS NULL AND JOB = 'CLERK';
+
+
+10) List all the employees who don’t have a reporting manager in DEPTNO 10 or 30  
+
+SELECT * FROM EMP WHERE MGR IS NULL AND DEPTNO IN (10, 30);
+
+
+11) List all the salesmen in DEPT 30 with SAL more than 2450  
+
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND DEPTNO = 30 AND SAL > 2450;
+
+
+12) List all the analysts in DEPT number 20 and having salary greater than 2500  
+
+SELECT * FROM EMP WHERE JOB = 'ANALYST' AND DEPTNO = 20 AND SAL > 2500;
+
+
+13) List all the employees whose name starts with ‘M’ or ‘J’  
+
+SELECT * FROM EMP WHERE ENAME LIKE 'M%' OR ENAME LIKE 'J%';
+
+
+14) List all the employees with annual salary except those who are working in DEPT 30  
+
+SELECT ENAME, SAL*12 AS ANNUAL_SALARY FROM EMP WHERE DEPTNO <> 30;
+
+
+15) List the employees whose name does not end with ‘ES’ or ‘R’  
+
+SELECT * FROM EMP WHERE ENAME NOT LIKE '%ES' AND ENAME NOT LIKE '%R';
+
+
+16) List all the employees who are having reporting managers in DEPT 10 along with a 10% hike in salary  
+
+SELECT ENAME, SAL*1.1 AS UPDATED_SALARY FROM EMP WHERE MGR IN (SELECT EMPNO FROM EMP WHERE DEPTNO = 10);
+
+
+17) Display all the employees who are ‘SALESMAN’s having ‘E’ as the last but one character in ENAME but salary having exactly 4 characters  
+
+SELECT * FROM EMP WHERE JOB = 'SALESMAN' AND ENAME LIKE '%E_' AND SAL BETWEEN 1000 AND 9999;
+
+
+18) Display all the employees who joined after the year 81  
+
+SELECT * FROM EMP WHERE HIRE_DATE > '31-DEC-81';
+
+
+19) Display all the employees who joined in February  
+
+SELECT * FROM EMP WHERE TO_CHAR(HIRE_DATE, 'MON') = 'FEB';
+
+
+20) List the employees who are not working as managers and clerks in DEPT 10 and 20 with a salary in the range of 1000 to 3000  
+
+SELECT * FROM EMP WHERE JOB NOT IN ('MANAGER', 'CLERK') AND DEPTNO IN (10, 20) AND SAL BETWEEN 1000 AND 3000;
+
+
+21) List the employees whose salary is not in the range of 1000 to 2000 and working in DEPT 10, 20, or 30 except all salesmen  
+
+SELECT * FROM EMP WHERE SAL NOT BETWEEN 1000 AND 2000 AND DEPTNO IN (10, 20, 30) AND JOB <> 'SALESMAN';
+
+
+22) List the department names which are having letter ‘O’ in their locations as well as their department names  
+
+SELECT * FROM DEPT WHERE DNAME LIKE '%O%' AND LOC LIKE '%O%';
+
+
+23) Display all the employees whose job has the string ‘MAN’ in it  
+
+SELECT * FROM EMP WHERE JOB LIKE '%MAN%';
+
+
+24) List the employees who were hired after 82 and before 87  
+
+SELECT * FROM EMP WHERE HIRE_DATE BETWEEN '01-JAN-83' AND '31-DEC-86';
+
+
+25) List all the details of employees hired in November and December  
+
+SELECT * FROM EMP WHERE TO_CHAR(HIRE_DATE, 'MON') IN ('NOV', 'DEC');
+
+
+26) List all the employee names and commission for those employees who earn commission more than their salary  
+
+SELECT ENAME, COMM FROM EMP WHERE COMM > SAL;
+
+
+27) List name and designation for all the employees having reporting managers and also their names starting with ‘S’  
+
+SELECT ENAME, JOB FROM EMP WHERE MGR IS NOT NULL AND ENAME LIKE 'S%';
+
+
+28) List name and salary of all the employees if their annual salary ends with ‘0’  
+
+SELECT ENAME, SAL FROM EMP WHERE MOD(SAL*12, 10) = 0;
+
+
+29) List name of the employee having at least 2 ‘L’s in his name  
+
+SELECT ENAME FROM EMP WHERE ENAME LIKE '%L%L%';
+
+
+30) List name of the employees whose name starts with a vowel  
+
+SELECT * FROM EMP WHERE ENAME LIKE 'A%' OR ENAME LIKE 'E%' OR ENAME LIKE 'I%' OR ENAME LIKE 'O%' OR ENAME LIKE 'U%';
+
+

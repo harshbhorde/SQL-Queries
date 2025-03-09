@@ -1,0 +1,119 @@
+1. Total salary needed to pay each job
+SELECT JOB, SUM(SAL) AS TOTAL_SALARY 
+FROM EMPLOYEE 
+GROUP BY JOB;
+
+2. Hire date on which at least 3 employees were hired
+SELECT HIREDATE, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+GROUP BY HIREDATE 
+HAVING COUNT(*) >= 3;
+
+3. Department number with more than 2 employees and total salary > 9000
+SELECT DEPTNO, SUM(SAL) AS TOTAL_SALARY, COUNT(*) AS EMP_COUNT
+FROM EMPLOYEE 
+GROUP BY DEPTNO 
+HAVING COUNT(*) > 2 AND SUM(SAL) > 9000;
+
+4. Employees count and average salary per department, excluding salaries < commission
+SELECT DEPTNO, COUNT(*) AS EMP_COUNT, AVG(SAL) AS AVG_SALARY 
+FROM EMPLOYEE 
+WHERE SAL >= COMM 
+GROUP BY DEPTNO;
+
+5. Salaries that have repetitions
+SELECT SAL, COUNT(*) AS SAL_COUNT 
+FROM EMPLOYEE 
+GROUP BY SAL 
+HAVING COUNT(*) > 1;
+
+6. Employee names that are repeated
+SELECT ENAME, COUNT(*) AS NAME_COUNT 
+FROM EMPLOYEE 
+GROUP BY ENAME 
+HAVING COUNT(*) > 1;
+
+7. Department number with average salary between 2500 and 3000
+SELECT DEPTNO, AVG(SAL) AS AVG_SALARY 
+FROM EMPLOYEE 
+GROUP BY DEPTNO 
+HAVING AVG(SAL) BETWEEN 2500 AND 3000;
+
+8. Employees count who are managers or analysts with annual salary ending in zero
+SELECT DEPTNO, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+WHERE JOB IN ('MANAGER', 'ANALYST') 
+AND SAL * 12 LIKE '%0'
+GROUP BY DEPTNO;
+
+9. Number of clerks in each department
+SELECT DEPTNO, COUNT(*) AS CLERK_COUNT 
+FROM EMPLOYEE 
+WHERE JOB = 'CLERK' 
+GROUP BY DEPTNO;
+
+10. Highest salary given to a manager in each department
+SELECT DEPTNO, MAX(SAL) AS MAX_MANAGER_SALARY 
+FROM EMPLOYEE 
+WHERE JOB = 'MANAGER' 
+GROUP BY DEPTNO;
+
+11. Number of times salaries have repeated
+SELECT SAL, COUNT(*) AS REPEAT_COUNT 
+FROM EMPLOYEE 
+GROUP BY SAL 
+HAVING COUNT(*) > 1;
+
+12. Number of employees in each department except department 10
+SELECT DEPTNO, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+WHERE DEPTNO <> 10 
+GROUP BY DEPTNO;
+
+13. Number of employees getting commission in each department
+SELECT DEPTNO, COUNT(*) AS COMM_EMP_COUNT 
+FROM EMPLOYEE 
+WHERE COMM IS NOT NULL 
+GROUP BY DEPTNO;
+
+14. Number of employees earning more than 1600 excluding managers
+SELECT DEPTNO, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+WHERE SAL > 1600 AND JOB <> 'MANAGER' 
+GROUP BY DEPTNO;
+
+15. Average salary of employees having a reporting manager per job
+SELECT JOB, AVG(SAL) AS AVG_SALARY 
+FROM EMPLOYEE 
+WHERE MGR IS NOT NULL 
+GROUP BY JOB;
+
+16. Number of employees hired into the same department on the same day
+SELECT DEPTNO, HIREDATE, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+GROUP BY DEPTNO, HIREDATE 
+HAVING COUNT(*) > 1;
+
+17. Number of employees getting the same salary in the same department
+SELECT DEPTNO, SAL, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+GROUP BY DEPTNO, SAL 
+HAVING COUNT(*) > 1;
+
+18. Maximum salary given in each designation excluding names starting with 'K'
+SELECT JOB, MAX(SAL) AS MAX_SALARY 
+FROM EMPLOYEE 
+WHERE ENAME NOT LIKE 'K%' 
+GROUP BY JOB;
+
+19. Number of employees reporting to 7839 in each department
+SELECT DEPTNO, COUNT(*) AS EMP_COUNT 
+FROM EMPLOYEE 
+WHERE MGR = 7839 
+GROUP BY DEPTNO;
+
+20. Number of employees whose names start with a vowel in each department
+SELECT DEPTNO, COUNT(*) AS VOWEL_NAME_COUNT 
+FROM EMPLOYEE 
+WHERE ENAME REGEXP '^[AEIOUaeiou]' 
+GROUP BY DEPTNO;
